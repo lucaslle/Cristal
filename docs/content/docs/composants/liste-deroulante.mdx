@@ -7,7 +7,7 @@ import SelectBasic from '@/demos/select-basic';
 
 ## Exemple
 
-Les options s'écrivent comme en HTML, avec des éléments `<option>` enfants. Elles peuvent être ajoutées ou retirées à tout moment, par exemple depuis un `.map()` en React.
+Les options s'écrivent comme en HTML, avec des éléments `<option>` enfants (`disabled` pour une option indisponible). Elles peuvent être ajoutées ou retirées à tout moment, par exemple depuis un `.map()` en React.
 
 <Preview column>
   <SelectBasic />
@@ -15,13 +15,30 @@ Les options s'écrivent comme en HTML, avec des éléments `<option>` enfants. E
 
 <include>../../../demos/select-basic.tsx</include>
 
+## Clavier
+
+| Touche | Liste fermée | Liste ouverte |
+|---|---|---|
+| Flèche bas / haut | ouvre la liste | option suivante / précédente |
+| Entrée, Espace | ouvre la liste | choisit l'option et ferme |
+| Début / Fin | — | première / dernière option |
+| Lettres | ouvre et va à l'option qui commence par ces lettres | va à l'option correspondante |
+| Échap | — | ferme sans changer la valeur |
+| Tab | passe au champ suivant | choisit l'option et passe au champ suivant |
+
+## Validation
+
+Avec `required`, l'envoi du formulaire est bloqué tant qu'aucune option n'est choisie, et le message « Choisissez une option dans la liste. » s'affiche. La propriété `error` remplace ce message.
+
 ## Accessibilité
 
-- Liste native sous le capot : navigation au clavier, saisie de la première lettre pour aller à une option, sélecteur natif sur mobile.
-- Mêmes règles que le champ texte pour le libellé, l'aide et l'erreur.
+- Suit le modèle « combobox » du W3C (ARIA Authoring Practices) : le focus reste sur le champ, et l'option active est annoncée grâce à `aria-activedescendant`.
+- Le libellé, l'aide et l'erreur sont lus par les lecteurs d'écran, comme pour le champ texte.
+- La liste s'affiche au-dessus de la page : elle n'est jamais coupée par un conteneur qui défile ou par une modale, et s'ouvre vers le haut quand la place manque en bas.
+- Un clic en dehors de la liste la ferme.
 
 <Callout>
-  La liste native ne permet ni recherche ni sélection multiple. Pour de longues listes, un composant avec recherche est prévu.
+  Pas encore de recherche dans la liste ni de sélection multiple.
 </Callout>
 
 ## API

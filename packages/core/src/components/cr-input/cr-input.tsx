@@ -1,5 +1,6 @@
-import { AttachInternals, Component, Event, EventEmitter, Prop, h } from '@stencil/core';
+import { AttachInternals, Component, Element, Event, EventEmitter, Listen, Prop, State, h } from '@stencil/core';
 import { FieldText, RequiredMark, describedBy } from '../../utils/field';
+import { handleInvalid, kindOf, validationMessage } from '../../utils/validation';
 
 export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
 
@@ -17,6 +18,7 @@ export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
   formAssociated: true,
 })
 export class CrInput {
+  @Element() el!: HTMLElement;
   @AttachInternals() internals: ElementInternals;
 
   /** Libellé affiché au-dessus du champ. */
@@ -29,7 +31,7 @@ export class CrInput {
   @Prop() type: InputType = 'text';
   /** Texte d'aide, lu par les lecteurs d'écran. */
   @Prop() hint?: string;
-  /** Message d'erreur ; passe le champ en état invalide. */
+  /** Message d'erreur ; remplace le message automatique de validation. */
   @Prop() error?: string;
   /** Texte indicatif affiché quand le champ est vide. */
   @Prop() placeholder?: string;
@@ -45,8 +47,16 @@ export class CrInput {
   /** Émis quand le champ perd le focus après modification ; detail : la valeur. */
   @Event() crChange: EventEmitter<string>;
 
+  @State() touched = false;
+
   private input?: HTMLInputElement;
   private initialValue?: string;
+
+  @Listen('invalid')
+  onInvalid(event: Event) {
+    this.touched = true;
+    handleInvalid(event, this.el, this.input);
+  }
 
   componentDidRender() {
     this.syncForm();
@@ -54,6 +64,7 @@ export class CrInput {
 
   formResetCallback() {
     if (this.initialValue !== undefined) this.value = this.initialValue;
+    this.touched = false;
   }
 
   formDisabledCallback(disabled: boolean) {
@@ -62,7 +73,7 @@ export class CrInput {
 
   private syncForm() {
     this.internals.setFormValue(this.value);
-    if (this.input) this.internals.setValidity(this.input.validity, this.input.validationMessage, this.input);
+    if (this.input) this.internals.setValidity(this.input.validity, validationMessage(this.input.validity, kindOf(this.type)), this.input);
   }
 
   private onInput = (event: Event) => {
@@ -78,13 +89,14 @@ export class CrInput {
 
   render() {
     const id = 'control';
+    const error = this.error || (this.touched ? validationMessage(this.input?.validity, kindOf(this.type)) : '');
     return (
       <div class="field">
         <label class="label" htmlFor={id} part="label">
           {this.label}
           <RequiredMark required={this.required} />
         </label>
-        <FieldText id={id} hint={this.hint} error={this.error} />
+        <FieldText id={id} hint={this.hint} error={error} />
         <input
           ref={(el) => (this.input = el)}
           id={id}
@@ -97,10 +109,13 @@ export class CrInput {
           autocomplete={this.autocomplete}
           required={this.required}
           disabled={this.disabled}
-          aria-invalid={this.error ? 'true' : undefined}
-          aria-describedby={describedBy({ id, hint: this.hint, error: this.error })}
+          aria-invalid={error ? 'true' : undefined}
+          aria-describedby={describedBy({ id, hint: this.hint, error })}
           onInput={this.onInput}
-          onChange={() => this.crChange.emit(this.value)}
+          onChange={() => {
+            this.touched = true;
+            this.crChange.emit(this.value);
+          }}
           onKeyDown={this.onKeyDown}
         />
       </div>

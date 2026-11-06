@@ -65,7 +65,7 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * Message d'erreur ; passe la case en état invalide.
+          * Message d'erreur ; remplace le message automatique de validation.
          */
         "error"?: string;
         /**
@@ -153,7 +153,7 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * Message d'erreur ; passe le champ en état invalide.
+          * Message d'erreur ; remplace le message automatique de validation.
          */
         "error"?: string;
         /**
@@ -198,7 +198,7 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * Message d'erreur ; passe la liste en état invalide.
+          * Message d'erreur ; remplace le message automatique de validation.
          */
         "error"?: string;
         /**
@@ -214,7 +214,7 @@ export namespace Components {
          */
         "name"?: string;
         /**
-          * Option vide affichée en premier.
+          * Texte affiché tant qu'aucune option n'est choisie.
          */
         "placeholder"?: string;
         /**
@@ -445,7 +445,7 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * Message d'erreur ; passe la case en état invalide.
+          * Message d'erreur ; remplace le message automatique de validation.
          */
         "error"?: string;
         /**
@@ -549,7 +549,7 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * Message d'erreur ; passe le champ en état invalide.
+          * Message d'erreur ; remplace le message automatique de validation.
          */
         "error"?: string;
         /**
@@ -606,7 +606,7 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * Message d'erreur ; passe la liste en état invalide.
+          * Message d'erreur ; remplace le message automatique de validation.
          */
         "error"?: string;
         /**
@@ -630,7 +630,7 @@ declare namespace LocalJSX {
          */
         "onCrChange"?: (event: CrSelectCustomEvent<string>) => void;
         /**
-          * Option vide affichée en premier.
+          * Texte affiché tant qu'aucune option n'est choisie.
          */
         "placeholder"?: string;
         /**
