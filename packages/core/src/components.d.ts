@@ -10,125 +10,220 @@ import { InputType } from "./components/cr-input/cr-input";
 export { ButtonSize, ButtonType, ButtonVariant } from "./components/cr-button/cr-button";
 export { InputType } from "./components/cr-input/cr-input";
 export namespace Components {
+    /**
+     * Bouton d'action.
+     */
     interface CrButton {
         /**
+          * Désactive le bouton.
           * @default false
          */
         "disabled": boolean;
         /**
+          * Occupe toute la largeur du conteneur.
           * @default false
          */
         "fullWidth": boolean;
         /**
+          * Affiche l'indicateur de chargement et bloque les clics.
           * @default false
          */
         "loading": boolean;
         /**
+          * Hauteur : xs 30px, s 36px, m 40px, l 48px.
           * @default 'm'
          */
         "size": ButtonSize;
         /**
+          * Comportement dans un formulaire.
           * @default 'button'
          */
         "type": ButtonType;
         /**
+          * Niveau de hiérarchie visuelle.
           * @default 'primary'
          */
         "variant": ButtonVariant;
     }
+    /**
+     * Carte de contenu.
+     */
     interface CrCard {
     }
+    /**
+     * Case à cocher.
+     */
     interface CrCheckbox {
         /**
+          * État coché.
           * @default false
          */
         "checked": boolean;
         /**
+          * Désactive la case.
           * @default false
          */
         "disabled": boolean;
+        /**
+          * Message d'erreur ; passe la case en état invalide.
+         */
         "error"?: string;
+        /**
+          * Texte d'aide, lu par les lecteurs d'écran.
+         */
         "hint"?: string;
         /**
+          * État partiellement coché, par exemple pour « tout sélectionner ».
           * @default false
          */
         "indeterminate": boolean;
+        /**
+          * Libellé affiché à côté de la case.
+         */
         "label": string;
+        /**
+          * Nom envoyé avec le formulaire.
+         */
         "name"?: string;
         /**
+          * Rend la case obligatoire.
           * @default false
          */
         "required": boolean;
         /**
+          * Valeur envoyée quand la case est cochée.
           * @default 'on'
          */
         "value": string;
     }
+    /**
+     * Fenêtre modale, basée sur l'élément dialog natif.
+     */
     interface CrDialog {
         /**
+          * Libellé du bouton de fermeture.
           * @default 'Fermer'
          */
         "closeLabel": string;
+        /**
+          * Titre affiché, et nom de la fenêtre pour les lecteurs d'écran.
+         */
         "label": string;
         /**
+          * Ouvre ou ferme la fenêtre.
           * @default false
          */
         "open": boolean;
     }
+    /**
+     * Panneau latéral, basé sur l'élément dialog natif.
+     */
     interface CrDrawer {
         /**
+          * Libellé du bouton de fermeture.
           * @default 'Fermer'
          */
         "closeLabel": string;
+        /**
+          * Titre affiché, et nom du panneau pour les lecteurs d'écran.
+         */
         "label": string;
         /**
+          * Ouvre ou ferme le panneau.
           * @default false
          */
         "open": boolean;
         /**
+          * Bord d'apparition : end (droite) ou start (gauche).
           * @default 'end'
          */
         "placement": 'start' | 'end';
     }
+    /**
+     * Champ de saisie de texte.
+     */
     interface CrInput {
+        /**
+          * Indication de remplissage automatique du navigateur.
+         */
         "autocomplete"?: string;
         /**
+          * Désactive le champ.
           * @default false
          */
         "disabled": boolean;
+        /**
+          * Message d'erreur ; passe le champ en état invalide.
+         */
         "error"?: string;
+        /**
+          * Texte d'aide, lu par les lecteurs d'écran.
+         */
         "hint"?: string;
+        /**
+          * Libellé affiché au-dessus du champ.
+         */
         "label": string;
+        /**
+          * Nom envoyé avec le formulaire.
+         */
         "name"?: string;
+        /**
+          * Texte indicatif affiché quand le champ est vide.
+         */
         "placeholder"?: string;
         /**
+          * Rend la saisie obligatoire.
           * @default false
          */
         "required": boolean;
         /**
+          * Type de saisie.
           * @default 'text'
          */
         "type": InputType;
         /**
+          * Valeur du champ.
           * @default ''
          */
         "value": string;
     }
+    /**
+     * Liste déroulante. Les options sont des éléments option enfants.
+     */
     interface CrSelect {
         /**
+          * Désactive la liste.
           * @default false
          */
         "disabled": boolean;
+        /**
+          * Message d'erreur ; passe la liste en état invalide.
+         */
         "error"?: string;
+        /**
+          * Texte d'aide, lu par les lecteurs d'écran.
+         */
         "hint"?: string;
+        /**
+          * Libellé affiché au-dessus de la liste.
+         */
         "label": string;
+        /**
+          * Nom envoyé avec le formulaire.
+         */
         "name"?: string;
+        /**
+          * Option vide affichée en premier.
+         */
         "placeholder"?: string;
         /**
+          * Rend le choix obligatoire.
           * @default false
          */
         "required": boolean;
         /**
+          * Valeur de l'option sélectionnée.
           * @default ''
          */
         "value": string;
@@ -155,12 +250,18 @@ export interface CrSelectCustomEvent<T> extends CustomEvent<T> {
     target: HTMLCrSelectElement;
 }
 declare global {
+    /**
+     * Bouton d'action.
+     */
     interface HTMLCrButtonElement extends Components.CrButton, HTMLStencilElement {
     }
     var HTMLCrButtonElement: {
         prototype: HTMLCrButtonElement;
         new (): HTMLCrButtonElement;
     };
+    /**
+     * Carte de contenu.
+     */
     interface HTMLCrCardElement extends Components.CrCard, HTMLStencilElement {
     }
     var HTMLCrCardElement: {
@@ -170,6 +271,9 @@ declare global {
     interface HTMLCrCheckboxElementEventMap {
         "crChange": boolean;
     }
+    /**
+     * Case à cocher.
+     */
     interface HTMLCrCheckboxElement extends Components.CrCheckbox, HTMLStencilElement {
         addEventListener<K extends keyof HTMLCrCheckboxElementEventMap>(type: K, listener: (this: HTMLCrCheckboxElement, ev: CrCheckboxCustomEvent<HTMLCrCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -187,6 +291,9 @@ declare global {
     interface HTMLCrDialogElementEventMap {
         "crClose": void;
     }
+    /**
+     * Fenêtre modale, basée sur l'élément dialog natif.
+     */
     interface HTMLCrDialogElement extends Components.CrDialog, HTMLStencilElement {
         addEventListener<K extends keyof HTMLCrDialogElementEventMap>(type: K, listener: (this: HTMLCrDialogElement, ev: CrDialogCustomEvent<HTMLCrDialogElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -204,6 +311,9 @@ declare global {
     interface HTMLCrDrawerElementEventMap {
         "crClose": void;
     }
+    /**
+     * Panneau latéral, basé sur l'élément dialog natif.
+     */
     interface HTMLCrDrawerElement extends Components.CrDrawer, HTMLStencilElement {
         addEventListener<K extends keyof HTMLCrDrawerElementEventMap>(type: K, listener: (this: HTMLCrDrawerElement, ev: CrDrawerCustomEvent<HTMLCrDrawerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -222,6 +332,9 @@ declare global {
         "crInput": string;
         "crChange": string;
     }
+    /**
+     * Champ de saisie de texte.
+     */
     interface HTMLCrInputElement extends Components.CrInput, HTMLStencilElement {
         addEventListener<K extends keyof HTMLCrInputElementEventMap>(type: K, listener: (this: HTMLCrInputElement, ev: CrInputCustomEvent<HTMLCrInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -239,6 +352,9 @@ declare global {
     interface HTMLCrSelectElementEventMap {
         "crChange": string;
     }
+    /**
+     * Liste déroulante. Les options sont des éléments option enfants.
+     */
     interface HTMLCrSelectElement extends Components.CrSelect, HTMLStencilElement {
         addEventListener<K extends keyof HTMLCrSelectElementEventMap>(type: K, listener: (this: HTMLCrSelectElement, ev: CrSelectCustomEvent<HTMLCrSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -266,8 +382,12 @@ declare global {
 declare namespace LocalJSX {
     type OneOf<K extends string, PropT, AttrT = PropT> = { [P in K]: PropT } & { [P in `attr:${K}`]?: never } | { [P in `attr:${K}`]: AttrT } & { [P in K]?: never };
 
+    /**
+     * Bouton d'action.
+     */
     interface CrButton {
         /**
+          * Désactive le bouton.
           * @default false
          */
         "disabled"?: boolean;
@@ -276,10 +396,12 @@ declare namespace LocalJSX {
          */
         "form"?: string;
         /**
+          * Occupe toute la largeur du conteneur.
           * @default false
          */
         "fullWidth"?: boolean;
         /**
+          * Affiche l'indicateur de chargement et bloque les clics.
           * @default false
          */
         "loading"?: boolean;
@@ -288,129 +410,236 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
+          * Hauteur : xs 30px, s 36px, m 40px, l 48px.
           * @default 'm'
          */
         "size"?: ButtonSize;
         /**
+          * Comportement dans un formulaire.
           * @default 'button'
          */
         "type"?: ButtonType;
         /**
+          * Niveau de hiérarchie visuelle.
           * @default 'primary'
          */
         "variant"?: ButtonVariant;
     }
+    /**
+     * Carte de contenu.
+     */
     interface CrCard {
     }
+    /**
+     * Case à cocher.
+     */
     interface CrCheckbox {
         /**
+          * État coché.
           * @default false
          */
         "checked"?: boolean;
         /**
+          * Désactive la case.
           * @default false
          */
         "disabled"?: boolean;
+        /**
+          * Message d'erreur ; passe la case en état invalide.
+         */
         "error"?: string;
         /**
           * The `id` of a `<form>` element to associate this element with.
          */
         "form"?: string;
+        /**
+          * Texte d'aide, lu par les lecteurs d'écran.
+         */
         "hint"?: string;
         /**
+          * État partiellement coché, par exemple pour « tout sélectionner ».
           * @default false
          */
         "indeterminate"?: boolean;
+        /**
+          * Libellé affiché à côté de la case.
+         */
         "label": string;
+        /**
+          * Nom envoyé avec le formulaire.
+         */
         "name"?: string;
+        /**
+          * Émis quand la case change ; detail : l'état coché.
+         */
         "onCrChange"?: (event: CrCheckboxCustomEvent<boolean>) => void;
         /**
+          * Rend la case obligatoire.
           * @default false
          */
         "required"?: boolean;
         /**
+          * Valeur envoyée quand la case est cochée.
           * @default 'on'
          */
         "value"?: string;
     }
+    /**
+     * Fenêtre modale, basée sur l'élément dialog natif.
+     */
     interface CrDialog {
         /**
+          * Libellé du bouton de fermeture.
           * @default 'Fermer'
          */
         "closeLabel"?: string;
+        /**
+          * Titre affiché, et nom de la fenêtre pour les lecteurs d'écran.
+         */
         "label": string;
+        /**
+          * Émis à chaque fermeture : Échap, bouton Fermer ou open à false.
+         */
         "onCrClose"?: (event: CrDialogCustomEvent<void>) => void;
         /**
+          * Ouvre ou ferme la fenêtre.
           * @default false
          */
         "open"?: boolean;
     }
+    /**
+     * Panneau latéral, basé sur l'élément dialog natif.
+     */
     interface CrDrawer {
         /**
+          * Libellé du bouton de fermeture.
           * @default 'Fermer'
          */
         "closeLabel"?: string;
+        /**
+          * Titre affiché, et nom du panneau pour les lecteurs d'écran.
+         */
         "label": string;
+        /**
+          * Émis à chaque fermeture : Échap, bouton Fermer ou open à false.
+         */
         "onCrClose"?: (event: CrDrawerCustomEvent<void>) => void;
         /**
+          * Ouvre ou ferme le panneau.
           * @default false
          */
         "open"?: boolean;
         /**
+          * Bord d'apparition : end (droite) ou start (gauche).
           * @default 'end'
          */
         "placement"?: 'start' | 'end';
     }
+    /**
+     * Champ de saisie de texte.
+     */
     interface CrInput {
+        /**
+          * Indication de remplissage automatique du navigateur.
+         */
         "autocomplete"?: string;
         /**
+          * Désactive le champ.
           * @default false
          */
         "disabled"?: boolean;
+        /**
+          * Message d'erreur ; passe le champ en état invalide.
+         */
         "error"?: string;
         /**
           * The `id` of a `<form>` element to associate this element with.
          */
         "form"?: string;
+        /**
+          * Texte d'aide, lu par les lecteurs d'écran.
+         */
         "hint"?: string;
+        /**
+          * Libellé affiché au-dessus du champ.
+         */
         "label": string;
+        /**
+          * Nom envoyé avec le formulaire.
+         */
         "name"?: string;
+        /**
+          * Émis quand le champ perd le focus après modification ; detail : la valeur.
+         */
         "onCrChange"?: (event: CrInputCustomEvent<string>) => void;
+        /**
+          * Émis à chaque frappe ; detail : la valeur.
+         */
         "onCrInput"?: (event: CrInputCustomEvent<string>) => void;
+        /**
+          * Texte indicatif affiché quand le champ est vide.
+         */
         "placeholder"?: string;
         /**
+          * Rend la saisie obligatoire.
           * @default false
          */
         "required"?: boolean;
         /**
+          * Type de saisie.
           * @default 'text'
          */
         "type"?: InputType;
         /**
+          * Valeur du champ.
           * @default ''
          */
         "value"?: string;
     }
+    /**
+     * Liste déroulante. Les options sont des éléments option enfants.
+     */
     interface CrSelect {
         /**
+          * Désactive la liste.
           * @default false
          */
         "disabled"?: boolean;
+        /**
+          * Message d'erreur ; passe la liste en état invalide.
+         */
         "error"?: string;
         /**
           * The `id` of a `<form>` element to associate this element with.
          */
         "form"?: string;
+        /**
+          * Texte d'aide, lu par les lecteurs d'écran.
+         */
         "hint"?: string;
+        /**
+          * Libellé affiché au-dessus de la liste.
+         */
         "label": string;
+        /**
+          * Nom envoyé avec le formulaire.
+         */
         "name"?: string;
+        /**
+          * Émis quand la sélection change ; detail : la valeur.
+         */
         "onCrChange"?: (event: CrSelectCustomEvent<string>) => void;
+        /**
+          * Option vide affichée en premier.
+         */
         "placeholder"?: string;
         /**
+          * Rend le choix obligatoire.
           * @default false
          */
         "required"?: boolean;
         /**
+          * Valeur de l'option sélectionnée.
           * @default ''
          */
         "value"?: string;
@@ -483,12 +712,33 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            /**
+             * Bouton d'action.
+             */
             "cr-button": LocalJSX.IntrinsicElements["cr-button"] & JSXBase.HTMLAttributes<HTMLCrButtonElement>;
+            /**
+             * Carte de contenu.
+             */
             "cr-card": LocalJSX.IntrinsicElements["cr-card"] & JSXBase.HTMLAttributes<HTMLCrCardElement>;
+            /**
+             * Case à cocher.
+             */
             "cr-checkbox": LocalJSX.IntrinsicElements["cr-checkbox"] & JSXBase.HTMLAttributes<HTMLCrCheckboxElement>;
+            /**
+             * Fenêtre modale, basée sur l'élément dialog natif.
+             */
             "cr-dialog": LocalJSX.IntrinsicElements["cr-dialog"] & JSXBase.HTMLAttributes<HTMLCrDialogElement>;
+            /**
+             * Panneau latéral, basé sur l'élément dialog natif.
+             */
             "cr-drawer": LocalJSX.IntrinsicElements["cr-drawer"] & JSXBase.HTMLAttributes<HTMLCrDrawerElement>;
+            /**
+             * Champ de saisie de texte.
+             */
             "cr-input": LocalJSX.IntrinsicElements["cr-input"] & JSXBase.HTMLAttributes<HTMLCrInputElement>;
+            /**
+             * Liste déroulante. Les options sont des éléments option enfants.
+             */
             "cr-select": LocalJSX.IntrinsicElements["cr-select"] & JSXBase.HTMLAttributes<HTMLCrSelectElement>;
         }
     }

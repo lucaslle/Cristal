@@ -1,0 +1,40 @@
+---
+title: Champ texte
+description: Saisie de texte, e-mail, mot de passe ou nombre. Balise cr-input, composant React CrInput.
+---
+
+import InputBasic from '@/demos/input-basic';
+import FormComplete from '@/demos/form-complete';
+
+## Exemples
+
+Le libellé est **obligatoire** et fait partie du composant. Le texte d'aide (`hint`) et le message d'erreur (`error`) sont affichés entre le libellé et le champ, et lus par les lecteurs d'écran.
+
+<Preview column>
+  <InputBasic />
+</Preview>
+
+<include>../../../demos/input-basic.tsx</include>
+
+## Dans un formulaire
+
+Les champs Cristal participent au `<form>` parent comme des champs natifs : leur valeur est envoyée sous leur `name`, `required` bloque l'envoi, `type="reset"` les remet à leur valeur de départ, et **Entrée** dans un champ texte envoie le formulaire.
+
+Essayez d'envoyer le formulaire vide, puis rempli.
+
+<Preview column>
+  <FormComplete />
+</Preview>
+
+<include>../../../demos/form-complete.tsx</include>
+
+## Accessibilité
+
+- Libellé relié au champ : un clic sur le libellé place le curseur dans le champ.
+- `hint` et `error` reliés par `aria-describedby` ; `error` ajoute `aria-invalid="true"` et une bordure rouge (l'erreur ne repose pas que sur la couleur : le message est affiché).
+- L'astérisque des champs obligatoires est masqué aux lecteurs d'écran, qui annoncent déjà « obligatoire ».
+- Utilisez `autocomplete` (`email`, `name`, `tel`…) pour aider le remplissage automatique.
+
+## API
+
+<ApiReference tag="cr-input" />

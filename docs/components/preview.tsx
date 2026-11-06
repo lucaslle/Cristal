@@ -1,0 +1,12 @@
+import type { CSSProperties, ReactNode } from 'react';
+
+export function Preview({ children, column = false, style }: { children: ReactNode; column?: boolean; style?: CSSProperties }) {
+  return (
+    <div
+      className={`not-prose my-6 flex flex-wrap items-center gap-4 rounded-xl border bg-white p-6 text-neutral-900 ${column ? 'flex-col items-stretch' : ''}`}
+      style={{ colorScheme: 'light', ...style }}
+    >
+      {children}
+    </div>
+  );
+}

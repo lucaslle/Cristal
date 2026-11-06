@@ -7,6 +7,13 @@ interface SelectOption {
   disabled: boolean;
 }
 
+/**
+ * Liste déroulante. Les options sont des éléments option enfants.
+ * @part label - Le libellé.
+ * @part control - La liste native.
+ * @part hint - Le texte d'aide.
+ * @part error - Le message d'erreur.
+ */
 @Component({
   tag: 'cr-select',
   styleUrls: ['../../global/field.css', 'cr-select.css'],
@@ -17,17 +24,26 @@ export class CrSelect {
   @Element() el!: HTMLElement;
   @AttachInternals() internals: ElementInternals;
 
+  /** Libellé affiché au-dessus de la liste. */
   @Prop() label!: string;
+  /** Nom envoyé avec le formulaire. */
   @Prop({ reflect: true }) name?: string;
+  /** Valeur de l'option sélectionnée. */
   @Prop({ mutable: true }) value = '';
+  /** Option vide affichée en premier. */
   @Prop() placeholder?: string;
+  /** Texte d'aide, lu par les lecteurs d'écran. */
   @Prop() hint?: string;
+  /** Message d'erreur ; passe la liste en état invalide. */
   @Prop() error?: string;
+  /** Rend le choix obligatoire. */
   @Prop({ reflect: true }) required = false;
+  /** Désactive la liste. */
   @Prop({ reflect: true }) disabled = false;
 
   @State() options: SelectOption[] = [];
 
+  /** Émis quand la sélection change ; detail : la valeur. */
   @Event() crChange: EventEmitter<string>;
 
   private select?: HTMLSelectElement;

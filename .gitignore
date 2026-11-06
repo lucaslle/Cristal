@@ -12,3 +12,6 @@ test-results/
 playwright-report/
 .next/
 next-env.d.ts
+.source/
+docs/out/
+docs/generated/

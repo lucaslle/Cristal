@@ -7,6 +7,7 @@ export const config: Config = {
     { type: 'dist', esmLoaderPath: '../loader' },
     { type: 'dist-custom-elements', externalRuntime: false },
     { type: 'dist-hydrate-script', dir: 'hydrate' },
+    { type: 'docs-json', file: '../../docs/generated/components.json' },
     reactOutputTarget({
       outDir: '../react/src/generated/',
       hydrateModule: '@cristal/core/hydrate',

@@ -1,0 +1,63 @@
+---
+title: Thème
+description: Adapter les couleurs, espacements et rayons avec les design tokens.
+---
+
+import ThemeCustom from '@/demos/theme-custom';
+
+Toutes les valeurs visuelles de Cristal sont des **variables CSS** préfixées par `--cr-`. Pour changer l'apparence, redéfinissez-les après l'import de `@cristal/tokens/tokens.css`.
+
+## Exemple : un thème noir aux angles droits
+
+<Preview>
+  <ThemeCustom />
+</Preview>
+
+```css title="cristal-theme.css"
+:root {
+  --cr-color-primary: #000000;
+  --cr-color-primary-hover: #333333;
+  --cr-color-primary-subtle: #e2e8f0;
+  --cr-color-primary-subtle-hover: #cbd5e0;
+  --cr-color-focus: #000000;
+  --cr-radius-m: 0px;
+}
+```
+
+Les variables peuvent aussi être redéfinies sur un conteneur, pour ne changer qu'une partie de la page.
+
+<Callout type="warn">
+  Vérifiez les contrastes de vos couleurs : au moins 4,5:1 pour le texte et 3:1 pour les contours de champs et l'indicateur de focus.
+</Callout>
+
+## Couleurs
+
+<TokenTable prefix="--cr-color" />
+
+## Espacements
+
+<TokenTable prefix="--cr-spacing" />
+
+## Hauteurs de contrôle
+
+<TokenTable prefix="--cr-control" />
+
+## Typographie
+
+<TokenTable prefix="--cr-font" />
+
+## Rayons et ombres
+
+<TokenTable prefix="--cr-radius" />
+
+<TokenTable prefix="--cr-shadow" />
+
+## Aller plus loin : les parts CSS
+
+Pour un réglage plus fin, chaque composant expose des **parts** stylables depuis l'extérieur avec `::part()`. Elles sont listées en bas de chaque page de composant.
+
+```css
+cr-input.search::part(label) {
+  color: white;
+}
+```
