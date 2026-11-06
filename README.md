@@ -2,6 +2,8 @@
 
 Bibliothèque de Web Components (Stencil) utilisable dans React et Next.js, préfixe `cr-`.
 
+Documentation : https://lucaslle.github.io/Cristal/
+
 ## Installation
 
 ```bash
@@ -107,4 +109,7 @@ pnpm install
 pnpm build
 pnpm --filter playground-next start
 pnpm --filter playground-next test:e2e
+pnpm --filter docs dev
 ```
+
+Le site de documentation (`docs/`) est publié sur GitHub Pages à chaque fusion sur `main`.
