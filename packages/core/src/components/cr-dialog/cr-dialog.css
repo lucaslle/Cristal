@@ -1,0 +1,5 @@
+.dialog {
+  width: min(560px, calc(100% - 2 * var(--cr-spacing-lg)));
+  max-height: calc(100% - 2 * var(--cr-spacing-3xl));
+  border-radius: var(--cr-radius-l);
+}

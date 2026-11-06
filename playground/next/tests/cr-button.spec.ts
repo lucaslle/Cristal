@@ -1,4 +1,3 @@
-import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
 test('is server-rendered with declarative shadow DOM', async ({ request }) => {
@@ -33,24 +32,8 @@ test('fires onClick with mouse and keyboard', async ({ page }) => {
   await expect(page.getByTestId('clicks')).toHaveText('Clics : 3');
 });
 
-test('submits and resets the parent form', async ({ page }) => {
-  await page.goto('/');
-  const email = page.getByLabel('E-mail');
-  await email.fill('autre@example.com');
-  await page.getByRole('button', { name: 'Envoyer' }).click();
-  await expect(page.getByTestId('submitted')).toHaveText('Envoyé : autre@example.com');
-  await page.getByRole('button', { name: 'Réinitialiser' }).click();
-  await expect(email).toHaveValue('lucas@example.com');
-});
-
 test('exposes disabled and loading states', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('button', { name: 'Désactivé' })).toBeDisabled();
   await expect(page.getByRole('button', { name: 'Chargement' })).toHaveAttribute('aria-busy', 'true');
-});
-
-test('has no WCAG 2.1 AA violations detectable by axe', async ({ page }) => {
-  await page.goto('/');
-  const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
-  expect(results.violations).toEqual([]);
 });

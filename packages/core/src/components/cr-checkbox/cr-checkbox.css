@@ -1,0 +1,33 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--cr-spacing-sm);
+}
+
+.box {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--cr-color-primary);
+  cursor: pointer;
+}
+
+.box:focus-visible {
+  outline: 2px solid var(--cr-color-focus);
+  outline-offset: 2px;
+}
+
+.box:disabled,
+.box:disabled + .label {
+  cursor: not-allowed;
+  color: var(--cr-color-on-disabled);
+}
+
+.label {
+  cursor: pointer;
+}
+
+.hint,
+.error {
+  padding-left: calc(20px + var(--cr-spacing-sm));
+}
