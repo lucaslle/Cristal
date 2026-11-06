@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  font-family: var(--cr-font-family);
+  color: var(--cr-color-text);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cr-spacing-lg);
+  height: 100%;
+  box-sizing: border-box;
+  padding: var(--cr-spacing-lg);
+  background: var(--cr-color-surface);
+  border: 1px solid var(--cr-color-disabled);
+  border-radius: var(--cr-radius-l);
+}
+
+.body {
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  gap: var(--cr-spacing-sm);
+}
+
+::slotted([slot='header']) {
+  margin: 0;
+}

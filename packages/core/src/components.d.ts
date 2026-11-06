@@ -6,7 +6,9 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ButtonSize, ButtonType, ButtonVariant } from "./components/cr-button/cr-button";
+import { InputType } from "./components/cr-input/cr-input";
 export { ButtonSize, ButtonType, ButtonVariant } from "./components/cr-button/cr-button";
+export { InputType } from "./components/cr-input/cr-input";
 export namespace Components {
     interface CrButton {
         /**
@@ -34,6 +36,123 @@ export namespace Components {
          */
         "variant": ButtonVariant;
     }
+    interface CrCard {
+    }
+    interface CrCheckbox {
+        /**
+          * @default false
+         */
+        "checked": boolean;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "error"?: string;
+        "hint"?: string;
+        /**
+          * @default false
+         */
+        "indeterminate": boolean;
+        "label": string;
+        "name"?: string;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * @default 'on'
+         */
+        "value": string;
+    }
+    interface CrDialog {
+        /**
+          * @default 'Fermer'
+         */
+        "closeLabel": string;
+        "label": string;
+        /**
+          * @default false
+         */
+        "open": boolean;
+    }
+    interface CrDrawer {
+        /**
+          * @default 'Fermer'
+         */
+        "closeLabel": string;
+        "label": string;
+        /**
+          * @default false
+         */
+        "open": boolean;
+        /**
+          * @default 'end'
+         */
+        "placement": 'start' | 'end';
+    }
+    interface CrInput {
+        "autocomplete"?: string;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "error"?: string;
+        "hint"?: string;
+        "label": string;
+        "name"?: string;
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * @default 'text'
+         */
+        "type": InputType;
+        /**
+          * @default ''
+         */
+        "value": string;
+    }
+    interface CrSelect {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "error"?: string;
+        "hint"?: string;
+        "label": string;
+        "name"?: string;
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "required": boolean;
+        /**
+          * @default ''
+         */
+        "value": string;
+    }
+}
+export interface CrCheckboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCrCheckboxElement;
+}
+export interface CrDialogCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCrDialogElement;
+}
+export interface CrDrawerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCrDrawerElement;
+}
+export interface CrInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCrInputElement;
+}
+export interface CrSelectCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCrSelectElement;
 }
 declare global {
     interface HTMLCrButtonElement extends Components.CrButton, HTMLStencilElement {
@@ -42,11 +161,111 @@ declare global {
         prototype: HTMLCrButtonElement;
         new (): HTMLCrButtonElement;
     };
+    interface HTMLCrCardElement extends Components.CrCard, HTMLStencilElement {
+    }
+    var HTMLCrCardElement: {
+        prototype: HTMLCrCardElement;
+        new (): HTMLCrCardElement;
+    };
+    interface HTMLCrCheckboxElementEventMap {
+        "crChange": boolean;
+    }
+    interface HTMLCrCheckboxElement extends Components.CrCheckbox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCrCheckboxElementEventMap>(type: K, listener: (this: HTMLCrCheckboxElement, ev: CrCheckboxCustomEvent<HTMLCrCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCrCheckboxElementEventMap>(type: K, listener: (this: HTMLCrCheckboxElement, ev: CrCheckboxCustomEvent<HTMLCrCheckboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCrCheckboxElement: {
+        prototype: HTMLCrCheckboxElement;
+        new (): HTMLCrCheckboxElement;
+    };
+    interface HTMLCrDialogElementEventMap {
+        "crClose": void;
+    }
+    interface HTMLCrDialogElement extends Components.CrDialog, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCrDialogElementEventMap>(type: K, listener: (this: HTMLCrDialogElement, ev: CrDialogCustomEvent<HTMLCrDialogElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCrDialogElementEventMap>(type: K, listener: (this: HTMLCrDialogElement, ev: CrDialogCustomEvent<HTMLCrDialogElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCrDialogElement: {
+        prototype: HTMLCrDialogElement;
+        new (): HTMLCrDialogElement;
+    };
+    interface HTMLCrDrawerElementEventMap {
+        "crClose": void;
+    }
+    interface HTMLCrDrawerElement extends Components.CrDrawer, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCrDrawerElementEventMap>(type: K, listener: (this: HTMLCrDrawerElement, ev: CrDrawerCustomEvent<HTMLCrDrawerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCrDrawerElementEventMap>(type: K, listener: (this: HTMLCrDrawerElement, ev: CrDrawerCustomEvent<HTMLCrDrawerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCrDrawerElement: {
+        prototype: HTMLCrDrawerElement;
+        new (): HTMLCrDrawerElement;
+    };
+    interface HTMLCrInputElementEventMap {
+        "crInput": string;
+        "crChange": string;
+    }
+    interface HTMLCrInputElement extends Components.CrInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCrInputElementEventMap>(type: K, listener: (this: HTMLCrInputElement, ev: CrInputCustomEvent<HTMLCrInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCrInputElementEventMap>(type: K, listener: (this: HTMLCrInputElement, ev: CrInputCustomEvent<HTMLCrInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCrInputElement: {
+        prototype: HTMLCrInputElement;
+        new (): HTMLCrInputElement;
+    };
+    interface HTMLCrSelectElementEventMap {
+        "crChange": string;
+    }
+    interface HTMLCrSelectElement extends Components.CrSelect, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCrSelectElementEventMap>(type: K, listener: (this: HTMLCrSelectElement, ev: CrSelectCustomEvent<HTMLCrSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCrSelectElementEventMap>(type: K, listener: (this: HTMLCrSelectElement, ev: CrSelectCustomEvent<HTMLCrSelectElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCrSelectElement: {
+        prototype: HTMLCrSelectElement;
+        new (): HTMLCrSelectElement;
+    };
     interface HTMLElementTagNameMap {
         "cr-button": HTMLCrButtonElement;
+        "cr-card": HTMLCrCardElement;
+        "cr-checkbox": HTMLCrCheckboxElement;
+        "cr-dialog": HTMLCrDialogElement;
+        "cr-drawer": HTMLCrDrawerElement;
+        "cr-input": HTMLCrInputElement;
+        "cr-select": HTMLCrSelectElement;
     }
 }
 declare namespace LocalJSX {
+    type OneOf<K extends string, PropT, AttrT = PropT> = { [P in K]: PropT } & { [P in `attr:${K}`]?: never } | { [P in `attr:${K}`]: AttrT } & { [P in K]?: never };
+
     interface CrButton {
         /**
           * @default false
@@ -81,6 +300,121 @@ declare namespace LocalJSX {
          */
         "variant"?: ButtonVariant;
     }
+    interface CrCard {
+    }
+    interface CrCheckbox {
+        /**
+          * @default false
+         */
+        "checked"?: boolean;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        "error"?: string;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hint"?: string;
+        /**
+          * @default false
+         */
+        "indeterminate"?: boolean;
+        "label": string;
+        "name"?: string;
+        "onCrChange"?: (event: CrCheckboxCustomEvent<boolean>) => void;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default 'on'
+         */
+        "value"?: string;
+    }
+    interface CrDialog {
+        /**
+          * @default 'Fermer'
+         */
+        "closeLabel"?: string;
+        "label": string;
+        "onCrClose"?: (event: CrDialogCustomEvent<void>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+    }
+    interface CrDrawer {
+        /**
+          * @default 'Fermer'
+         */
+        "closeLabel"?: string;
+        "label": string;
+        "onCrClose"?: (event: CrDrawerCustomEvent<void>) => void;
+        /**
+          * @default false
+         */
+        "open"?: boolean;
+        /**
+          * @default 'end'
+         */
+        "placement"?: 'start' | 'end';
+    }
+    interface CrInput {
+        "autocomplete"?: string;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        "error"?: string;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hint"?: string;
+        "label": string;
+        "name"?: string;
+        "onCrChange"?: (event: CrInputCustomEvent<string>) => void;
+        "onCrInput"?: (event: CrInputCustomEvent<string>) => void;
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default 'text'
+         */
+        "type"?: InputType;
+        /**
+          * @default ''
+         */
+        "value"?: string;
+    }
+    interface CrSelect {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        "error"?: string;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        "hint"?: string;
+        "label": string;
+        "name"?: string;
+        "onCrChange"?: (event: CrSelectCustomEvent<string>) => void;
+        "placeholder"?: string;
+        /**
+          * @default false
+         */
+        "required"?: boolean;
+        /**
+          * @default ''
+         */
+        "value"?: string;
+    }
 
     interface CrButtonAttributes {
         "variant": ButtonVariant;
@@ -90,9 +424,59 @@ declare namespace LocalJSX {
         "loading": boolean;
         "fullWidth": boolean;
     }
+    interface CrCheckboxAttributes {
+        "label": string;
+        "name": string;
+        "value": string;
+        "checked": boolean;
+        "indeterminate": boolean;
+        "hint": string;
+        "error": string;
+        "required": boolean;
+        "disabled": boolean;
+    }
+    interface CrDialogAttributes {
+        "open": boolean;
+        "label": string;
+        "closeLabel": string;
+    }
+    interface CrDrawerAttributes {
+        "open": boolean;
+        "label": string;
+        "closeLabel": string;
+        "placement": 'start' | 'end';
+    }
+    interface CrInputAttributes {
+        "label": string;
+        "name": string;
+        "value": string;
+        "type": InputType;
+        "hint": string;
+        "error": string;
+        "placeholder": string;
+        "autocomplete": string;
+        "required": boolean;
+        "disabled": boolean;
+    }
+    interface CrSelectAttributes {
+        "label": string;
+        "name": string;
+        "value": string;
+        "placeholder": string;
+        "hint": string;
+        "error": string;
+        "required": boolean;
+        "disabled": boolean;
+    }
 
     interface IntrinsicElements {
         "cr-button": Omit<CrButton, keyof CrButtonAttributes> & { [K in keyof CrButton & keyof CrButtonAttributes]?: CrButton[K] } & { [K in keyof CrButton & keyof CrButtonAttributes as `attr:${K}`]?: CrButtonAttributes[K] } & { [K in keyof CrButton & keyof CrButtonAttributes as `prop:${K}`]?: CrButton[K] };
+        "cr-card": CrCard;
+        "cr-checkbox": Omit<CrCheckbox, keyof CrCheckboxAttributes> & { [K in keyof CrCheckbox & keyof CrCheckboxAttributes]?: CrCheckbox[K] } & { [K in keyof CrCheckbox & keyof CrCheckboxAttributes as `attr:${K}`]?: CrCheckboxAttributes[K] } & { [K in keyof CrCheckbox & keyof CrCheckboxAttributes as `prop:${K}`]?: CrCheckbox[K] } & OneOf<"label", CrCheckbox["label"], CrCheckboxAttributes["label"]>;
+        "cr-dialog": Omit<CrDialog, keyof CrDialogAttributes> & { [K in keyof CrDialog & keyof CrDialogAttributes]?: CrDialog[K] } & { [K in keyof CrDialog & keyof CrDialogAttributes as `attr:${K}`]?: CrDialogAttributes[K] } & { [K in keyof CrDialog & keyof CrDialogAttributes as `prop:${K}`]?: CrDialog[K] } & OneOf<"label", CrDialog["label"], CrDialogAttributes["label"]>;
+        "cr-drawer": Omit<CrDrawer, keyof CrDrawerAttributes> & { [K in keyof CrDrawer & keyof CrDrawerAttributes]?: CrDrawer[K] } & { [K in keyof CrDrawer & keyof CrDrawerAttributes as `attr:${K}`]?: CrDrawerAttributes[K] } & { [K in keyof CrDrawer & keyof CrDrawerAttributes as `prop:${K}`]?: CrDrawer[K] } & OneOf<"label", CrDrawer["label"], CrDrawerAttributes["label"]>;
+        "cr-input": Omit<CrInput, keyof CrInputAttributes> & { [K in keyof CrInput & keyof CrInputAttributes]?: CrInput[K] } & { [K in keyof CrInput & keyof CrInputAttributes as `attr:${K}`]?: CrInputAttributes[K] } & { [K in keyof CrInput & keyof CrInputAttributes as `prop:${K}`]?: CrInput[K] } & OneOf<"label", CrInput["label"], CrInputAttributes["label"]>;
+        "cr-select": Omit<CrSelect, keyof CrSelectAttributes> & { [K in keyof CrSelect & keyof CrSelectAttributes]?: CrSelect[K] } & { [K in keyof CrSelect & keyof CrSelectAttributes as `attr:${K}`]?: CrSelectAttributes[K] } & { [K in keyof CrSelect & keyof CrSelectAttributes as `prop:${K}`]?: CrSelect[K] } & OneOf<"label", CrSelect["label"], CrSelectAttributes["label"]>;
     }
 }
 export { LocalJSX as JSX };
@@ -100,6 +484,12 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "cr-button": LocalJSX.IntrinsicElements["cr-button"] & JSXBase.HTMLAttributes<HTMLCrButtonElement>;
+            "cr-card": LocalJSX.IntrinsicElements["cr-card"] & JSXBase.HTMLAttributes<HTMLCrCardElement>;
+            "cr-checkbox": LocalJSX.IntrinsicElements["cr-checkbox"] & JSXBase.HTMLAttributes<HTMLCrCheckboxElement>;
+            "cr-dialog": LocalJSX.IntrinsicElements["cr-dialog"] & JSXBase.HTMLAttributes<HTMLCrDialogElement>;
+            "cr-drawer": LocalJSX.IntrinsicElements["cr-drawer"] & JSXBase.HTMLAttributes<HTMLCrDrawerElement>;
+            "cr-input": LocalJSX.IntrinsicElements["cr-input"] & JSXBase.HTMLAttributes<HTMLCrInputElement>;
+            "cr-select": LocalJSX.IntrinsicElements["cr-select"] & JSXBase.HTMLAttributes<HTMLCrSelectElement>;
         }
     }
 }

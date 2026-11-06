@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  font-family: var(--cr-font-family);
+  color: var(--cr-color-text);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cr-spacing-xs);
+}
+
+.label {
+  font-size: var(--cr-font-size-m);
+  font-weight: var(--cr-font-weight-medium);
+}
+
+.required {
+  color: var(--cr-color-danger);
+}
+
+.hint {
+  font-size: var(--cr-font-size-s);
+  color: var(--cr-color-text-muted);
+}
+
+.error {
+  font-size: var(--cr-font-size-s);
+  color: var(--cr-color-danger);
+}
+
+.control {
+  box-sizing: border-box;
+  min-height: var(--cr-control-m);
+  padding: 0 var(--cr-spacing-sm);
+  font-family: inherit;
+  font-size: var(--cr-font-size-m);
+  color: var(--cr-color-text);
+  background: var(--cr-color-surface);
+  border: 1px solid var(--cr-color-border);
+  border-radius: var(--cr-radius-m);
+}
+
+.control:focus-visible {
+  outline: 2px solid var(--cr-color-focus);
+  outline-offset: 2px;
+}
+
+.control[aria-invalid='true'] {
+  border-color: var(--cr-color-danger);
+}
+
+.control:disabled {
+  color: var(--cr-color-on-disabled);
+  background: var(--cr-color-disabled);
+  cursor: not-allowed;
+}
