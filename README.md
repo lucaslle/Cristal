@@ -53,7 +53,7 @@ Icônes : `slot="start"` (avant le texte) et `slot="end"` (après le texte).
 
 ### Champs de formulaire : `cr-input`, `cr-select`, `cr-checkbox`
 
-Ils participent au `<form>` parent comme des champs natifs (valeur envoyée, validation, réinitialisation). Le libellé est obligatoire et rendu par le composant.
+Ils participent au `<form>` parent comme des champs natifs (valeur envoyée, validation, réinitialisation). Le libellé est obligatoire et rendu par le composant. Les erreurs de saisie (champ obligatoire vide, e-mail mal formé…) s'affichent automatiquement en français ; `error` remplace le message automatique.
 
 | Propriété | Composants | Description |
 |---|---|---|
@@ -64,7 +64,7 @@ Ils participent au `<form>` parent comme des champs natifs (valeur envoyée, val
 | `error` | tous | message d'erreur : bordure rouge, `aria-invalid`, lu par les lecteurs d'écran |
 | `required`, `disabled` | tous | comme les champs natifs |
 | `type` | `cr-input` | `text`, `email`, `password`, `number`, `tel`, `url`, `search` |
-| `placeholder` | `cr-input`, `cr-select` | texte indicatif / option vide de `cr-select` |
+| `placeholder` | `cr-input`, `cr-select` | texte indicatif / texte affiché tant qu'aucune option n'est choisie |
 | `autocomplete` | `cr-input` | comme le champ natif |
 | `checked`, `indeterminate` | `cr-checkbox` | état de la case |
 

@@ -16,11 +16,24 @@ Le libellé est **obligatoire** et fait partie du composant. Le texte d'aide (`h
 
 <include>../../../demos/input-basic.tsx</include>
 
+## Validation automatique
+
+Les erreurs de saisie s'affichent toutes seules, en français, **quand on quitte le champ** après l'avoir modifié, ou **quand on tente d'envoyer** le formulaire. Elles disparaissent dès que la saisie est corrigée.
+
+| Cas | Message |
+|---|---|
+| Champ obligatoire vide | Ce champ est obligatoire. |
+| `type="email"` mal formé | Saisissez une adresse e-mail valide, par exemple nom@domaine.fr. |
+| `type="url"` mal formé | Saisissez une adresse web valide, par exemple https://exemple.fr. |
+| `type="number"` non numérique | Saisissez un nombre. |
+
+À l'envoi, le focus va sur le **premier champ en erreur**, et son message est lu par les lecteurs d'écran. Pour une erreur venant du serveur (« cette adresse est déjà utilisée »), passez votre propre message avec `error` : il remplace le message automatique.
+
 ## Dans un formulaire
 
 Les champs Cristal participent au `<form>` parent comme des champs natifs : leur valeur est envoyée sous leur `name`, `required` bloque l'envoi, `type="reset"` les remet à leur valeur de départ, et **Entrée** dans un champ texte envoie le formulaire.
 
-Essayez d'envoyer le formulaire vide, puis rempli.
+Essayez d'envoyer le formulaire vide, de saisir une adresse e-mail incomplète, puis de tout remplir.
 
 <Preview column>
   <FormComplete />

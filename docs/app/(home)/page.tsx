@@ -27,7 +27,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="rounded-2xl border bg-white p-6 text-neutral-900" style={{ colorScheme: 'light' }}>
+        <div className="rounded-2xl border bg-[#f3f1f8] p-6 text-neutral-900" style={{ colorScheme: 'light' }}>
           <CrCard>
             <h2 slot="header" className="text-lg font-semibold">
               Créer un compte
