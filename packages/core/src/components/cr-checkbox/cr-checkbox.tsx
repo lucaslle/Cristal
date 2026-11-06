@@ -1,5 +1,6 @@
-import { AttachInternals, Component, Event, EventEmitter, Prop, h } from '@stencil/core';
+import { AttachInternals, Component, Element, Event, EventEmitter, Listen, Prop, State, h } from '@stencil/core';
 import { FieldText, RequiredMark, describedBy } from '../../utils/field';
+import { handleInvalid, validationMessage } from '../../utils/validation';
 
 /**
  * Case à cocher.
@@ -15,6 +16,7 @@ import { FieldText, RequiredMark, describedBy } from '../../utils/field';
   formAssociated: true,
 })
 export class CrCheckbox {
+  @Element() el!: HTMLElement;
   @AttachInternals() internals: ElementInternals;
 
   /** Libellé affiché à côté de la case. */
@@ -29,7 +31,7 @@ export class CrCheckbox {
   @Prop() indeterminate = false;
   /** Texte d'aide, lu par les lecteurs d'écran. */
   @Prop() hint?: string;
-  /** Message d'erreur ; passe la case en état invalide. */
+  /** Message d'erreur ; remplace le message automatique de validation. */
   @Prop() error?: string;
   /** Rend la case obligatoire. */
   @Prop({ reflect: true }) required = false;
@@ -39,8 +41,16 @@ export class CrCheckbox {
   /** Émis quand la case change ; detail : l'état coché. */
   @Event() crChange: EventEmitter<boolean>;
 
+  @State() touched = false;
+
   private input?: HTMLInputElement;
   private initialChecked?: boolean;
+
+  @Listen('invalid')
+  onInvalid(event: Event) {
+    this.touched = true;
+    handleInvalid(event, this.el, this.input);
+  }
 
   componentDidRender() {
     if (this.input) this.input.indeterminate = this.indeterminate;
@@ -49,6 +59,7 @@ export class CrCheckbox {
 
   formResetCallback() {
     if (this.initialChecked !== undefined) this.checked = this.initialChecked;
+    this.touched = false;
   }
 
   formDisabledCallback(disabled: boolean) {
@@ -57,11 +68,12 @@ export class CrCheckbox {
 
   private syncForm() {
     this.internals.setFormValue(this.checked ? this.value : null);
-    if (this.input) this.internals.setValidity(this.input.validity, this.input.validationMessage, this.input);
+    if (this.input) this.internals.setValidity(this.input.validity, validationMessage(this.input.validity, 'checkbox'), this.input);
   }
 
   private onChange = (event: Event) => {
     this.initialChecked ??= this.checked;
+    this.touched = true;
     this.checked = (event.target as HTMLInputElement).checked;
     this.syncForm();
     this.crChange.emit(this.checked);
@@ -69,6 +81,7 @@ export class CrCheckbox {
 
   render() {
     const id = 'control';
+    const error = this.error || (this.touched ? validationMessage(this.input?.validity, 'checkbox') : '');
     return (
       <div class="field">
         <div class="row">
@@ -81,8 +94,8 @@ export class CrCheckbox {
             checked={this.checked}
             required={this.required}
             disabled={this.disabled}
-            aria-invalid={this.error ? 'true' : undefined}
-            aria-describedby={describedBy({ id, hint: this.hint, error: this.error })}
+            aria-invalid={error ? 'true' : undefined}
+            aria-describedby={describedBy({ id, hint: this.hint, error })}
             onChange={this.onChange}
           />
           <label class="label" htmlFor={id} part="label">
@@ -90,7 +103,7 @@ export class CrCheckbox {
             <RequiredMark required={this.required} />
           </label>
         </div>
-        <FieldText id={id} hint={this.hint} error={this.error} />
+        <FieldText id={id} hint={this.hint} error={error} />
       </div>
     );
   }
