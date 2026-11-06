@@ -1,0 +1,10 @@
+{
+  "color": {
+    "primary": { "$value": "#1d4ed8", "$type": "color" },
+    "text": { "$value": "#111827", "$type": "color" },
+    "surface": { "$value": "#ffffff", "$type": "color" },
+    "danger": { "$value": "#b91c1c", "$type": "color" },
+    "success": { "$value": "#15803d", "$type": "color" },
+    "focus": { "$value": "#1d4ed8", "$type": "color" }
+  }
+}
