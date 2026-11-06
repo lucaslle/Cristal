@@ -1,0 +1,38 @@
+{
+  "name": "@cristal/core",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist",
+    "loader",
+    "hydrate"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs.js"
+    },
+    "./loader": "./loader/index.js",
+    "./hydrate": "./hydrate/index.js",
+    "./dist/components": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.js"
+    },
+    "./dist/*": "./dist/*"
+  },
+  "scripts": {
+    "build": "stencil build"
+  },
+  "dependencies": {
+    "@cristal/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "@stencil/core": "^4.45.2",
+    "@stencil/react-output-target": "^1.7.0"
+  },
+  "collection": "dist/collection/collection-manifest.json"
+}
