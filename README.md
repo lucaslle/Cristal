@@ -49,6 +49,57 @@ Dans un composant client (`'use client'`), importer depuis `@cristal/react`.
 
 Icônes : `slot="start"` (avant le texte) et `slot="end"` (après le texte).
 
+### Champs de formulaire : `cr-input`, `cr-select`, `cr-checkbox`
+
+Ils participent au `<form>` parent comme des champs natifs (valeur envoyée, validation, réinitialisation). Le libellé est obligatoire et rendu par le composant.
+
+| Propriété | Composants | Description |
+|---|---|---|
+| `label` | tous | libellé (obligatoire) |
+| `name` | tous | nom envoyé avec le formulaire |
+| `value` | tous | valeur (`cr-checkbox` : valeur envoyée si cochée, `on` par défaut) |
+| `hint` | tous | texte d'aide, lu par les lecteurs d'écran |
+| `error` | tous | message d'erreur : bordure rouge, `aria-invalid`, lu par les lecteurs d'écran |
+| `required`, `disabled` | tous | comme les champs natifs |
+| `type` | `cr-input` | `text`, `email`, `password`, `number`, `tel`, `url`, `search` |
+| `placeholder` | `cr-input`, `cr-select` | texte indicatif / option vide de `cr-select` |
+| `autocomplete` | `cr-input` | comme le champ natif |
+| `checked`, `indeterminate` | `cr-checkbox` | état de la case |
+
+Événements : `onCrInput` (`cr-input`, à chaque frappe) et `onCrChange` (tous). La valeur est dans `event.detail`.
+
+```tsx
+<CrSelect label="Pays" name="country" placeholder="Choisir un pays" required>
+  <option value="fr">France</option>
+  <option value="be">Belgique</option>
+</CrSelect>
+```
+
+### Modale et panneau latéral : `cr-dialog`, `cr-drawer`
+
+Basés sur l'élément natif `<dialog>` : focus piégé dans la fenêtre, fermeture avec Échap, focus rendu au bouton d'ouverture, défilement de la page bloqué.
+
+| Propriété | Description |
+|---|---|
+| `open` | ouvert ou fermé |
+| `label` | titre affiché, et nom de la fenêtre pour les lecteurs d'écran (obligatoire) |
+| `closeLabel` | libellé du bouton de fermeture, `Fermer` par défaut |
+| `placement` | `cr-drawer` seulement : `end` (droite, par défaut) ou `start` (gauche) |
+
+Contenu dans le slot par défaut, boutons d'action dans `slot="footer"`. L'événement `onCrClose` est émis à chaque fermeture (Échap, bouton Fermer, `open` à `false`). Largeur du drawer : variable CSS `--cr-drawer-width` (400px par défaut).
+
+```tsx
+<CrDialog label="Supprimer le produit ?" open={open} onCrClose={() => setOpen(false)}>
+  <p>Cette action est définitive.</p>
+  <CrButton slot="footer" variant="secondary" onClick={() => setOpen(false)}>Annuler</CrButton>
+  <CrButton slot="footer" onClick={remove}>Supprimer</CrButton>
+</CrDialog>
+```
+
+### `cr-card`
+
+Conteneur avec `slot="header"`, contenu par défaut et `slot="footer"`. L'en-tête et le pied ne sont affichés que s'ils sont fournis.
+
 ## Développement
 
 ```bash
