@@ -1,6 +1,6 @@
 import { createMDX } from 'fumadocs-mdx/next';
 
-const basePath = '/Cristal';
+const basePath = process.env.PAGES_BASE_PATH ?? '';
 
 /** @type {import('next').NextConfig} */
 const config = {
