@@ -1,8 +1,15 @@
 import { expect, test } from '@playwright/test';
 
-const fillValidForm = async (page: import('@playwright/test').Page) => {
+type Page = import('@playwright/test').Page;
+
+const choose = async (page: Page, label: string, option: string) => {
+  await page.getByRole('combobox', { name: label }).click();
+  await page.getByRole('option', { name: option }).click();
+};
+
+const fillValidForm = async (page: Page) => {
   await page.getByLabel('E-mail').fill('autre@example.com');
-  await page.getByLabel('Pays').selectOption('be');
+  await choose(page, 'Pays', 'Belgique');
   await page.getByLabel("J'accepte les conditions").check();
 };
 
@@ -32,7 +39,7 @@ test('resets every field to its initial value', async ({ page }) => {
   await fillValidForm(page);
   await page.getByRole('button', { name: 'Réinitialiser' }).click();
   await expect(page.getByLabel('E-mail')).toHaveValue('lucas@example.com');
-  await expect(page.getByLabel('Pays')).toHaveValue('');
+  await expect(page.getByRole('combobox', { name: 'Pays' })).toHaveText('Choisir un pays');
   await expect(page.getByLabel("J'accepte les conditions")).not.toBeChecked();
 });
 
@@ -50,6 +57,26 @@ test('picks up options added after load', async ({ page }) => {
     option.textContent = 'Luxembourg';
     select.append(option);
   });
-  await page.getByLabel('Pays').selectOption('lu');
-  await expect(page.getByLabel('Pays')).toHaveValue('lu');
+  await choose(page, 'Pays', 'Luxembourg');
+  await expect(page.getByRole('combobox', { name: 'Pays' })).toHaveText('Luxembourg');
+});
+
+test('shows French errors on submit and focuses the first invalid field', async ({ page }) => {
+  await page.getByLabel('E-mail').fill('');
+  await page.getByRole('button', { name: 'Envoyer' }).click();
+  const email = page.getByLabel('E-mail');
+  await expect(email).toBeFocused();
+  await expect(email).toHaveAccessibleDescription(/Ce champ est obligatoire/);
+  await expect(page.getByRole('combobox', { name: 'Pays' })).toHaveAccessibleDescription('Choisissez une option dans la liste.');
+  await expect(page.getByLabel("J'accepte les conditions")).toHaveAccessibleDescription('Cochez cette case pour continuer.');
+});
+
+test('flags a malformed e-mail when leaving the field, and clears it once fixed', async ({ page }) => {
+  const email = page.getByLabel('E-mail');
+  await email.fill('lucas@');
+  await email.blur();
+  await expect(email).toHaveAttribute('aria-invalid', 'true');
+  await expect(email).toHaveAccessibleDescription(/Saisissez une adresse e-mail valide/);
+  await email.fill('lucas@example.com');
+  await expect(email).not.toHaveAttribute('aria-invalid', 'true');
 });
