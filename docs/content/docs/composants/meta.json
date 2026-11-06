@@ -1,0 +1,4 @@
+{
+  "title": "Composants",
+  "pages": ["bouton", "champ-texte", "liste-deroulante", "case-a-cocher", "modale", "drawer", "carte"]
+}

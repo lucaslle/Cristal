@@ -1,0 +1,29 @@
+---
+title: Liste déroulante
+description: Choix d'une valeur parmi plusieurs. Balise cr-select, composant React CrSelect.
+---
+
+import SelectBasic from '@/demos/select-basic';
+
+## Exemple
+
+Les options s'écrivent comme en HTML, avec des éléments `<option>` enfants. Elles peuvent être ajoutées ou retirées à tout moment, par exemple depuis un `.map()` en React.
+
+<Preview column>
+  <SelectBasic />
+</Preview>
+
+<include>../../../demos/select-basic.tsx</include>
+
+## Accessibilité
+
+- Liste native sous le capot : navigation au clavier, saisie de la première lettre pour aller à une option, sélecteur natif sur mobile.
+- Mêmes règles que le champ texte pour le libellé, l'aide et l'erreur.
+
+<Callout>
+  La liste native ne permet ni recherche ni sélection multiple. Pour de longues listes, un composant avec recherche est prévu.
+</Callout>
+
+## API
+
+<ApiReference tag="cr-select" />
