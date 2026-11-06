@@ -1,19 +1,19 @@
 {
   "color": {
     "primary": {
-      "$value": "#1d4ed8",
+      "$value": "#6d28d9",
       "$type": "color"
     },
     "primary-hover": {
-      "$value": "#1e40af",
+      "$value": "#5b21b6",
       "$type": "color"
     },
     "primary-subtle": {
-      "$value": "#dbeafe",
+      "$value": "#ede9fe",
       "$type": "color"
     },
     "primary-subtle-hover": {
-      "$value": "#bfdbfe",
+      "$value": "#ddd6fe",
       "$type": "color"
     },
     "on-primary": {
@@ -45,7 +45,7 @@
       "$type": "color"
     },
     "focus": {
-      "$value": "#1d4ed8",
+      "$value": "#6d28d9",
       "$type": "color"
     },
     "border": {
