@@ -1,0 +1,15 @@
+{
+  "name": "@cristal/tokens",
+  "version": "0.0.0",
+  "type": "module",
+  "files": ["build"],
+  "exports": {
+    "./tokens.css": "./build/tokens.css"
+  },
+  "scripts": {
+    "build": "style-dictionary build --config config.json"
+  },
+  "devDependencies": {
+    "style-dictionary": "^5.8.0"
+  }
+}

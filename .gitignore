@@ -1,0 +1,10 @@
+node_modules/
+dist/
+build/
+loader/
+www/
+packages/*/src/generated/
+*.tsbuildinfo
+.DS_Store
+.stencil/
+packages/core/hydrate/
