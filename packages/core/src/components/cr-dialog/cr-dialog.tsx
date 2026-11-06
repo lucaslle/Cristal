@@ -1,6 +1,16 @@
 import { Component, Element, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
 import { OverlayContent, releaseScroll, syncDialog } from '../../utils/overlay';
 
+/**
+ * Fenêtre modale, basée sur l'élément dialog natif.
+ * @slot - Contenu de la fenêtre.
+ * @slot footer - Boutons d'action.
+ * @part dialog - L'élément dialog.
+ * @part title - Le titre.
+ * @part close - Le bouton Fermer.
+ * @part body - La zone de contenu.
+ * @part footer - La zone des actions.
+ */
 @Component({
   tag: 'cr-dialog',
   styleUrls: ['../../global/overlay.css', 'cr-dialog.css'],
@@ -9,10 +19,14 @@ import { OverlayContent, releaseScroll, syncDialog } from '../../utils/overlay';
 export class CrDialog {
   @Element() el!: HTMLElement;
 
+  /** Ouvre ou ferme la fenêtre. */
   @Prop({ mutable: true, reflect: true }) open = false;
+  /** Titre affiché, et nom de la fenêtre pour les lecteurs d'écran. */
   @Prop() label!: string;
+  /** Libellé du bouton de fermeture. */
   @Prop() closeLabel = 'Fermer';
 
+  /** Émis à chaque fermeture : Échap, bouton Fermer ou open à false. */
   @Event() crClose: EventEmitter<void>;
 
   private dialog?: HTMLDialogElement;

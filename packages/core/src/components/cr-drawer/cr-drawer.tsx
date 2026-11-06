@@ -1,6 +1,16 @@
 import { Component, Element, Event, EventEmitter, Prop, Watch, h } from '@stencil/core';
 import { OverlayContent, releaseScroll, syncDialog } from '../../utils/overlay';
 
+/**
+ * Panneau latéral, basé sur l'élément dialog natif.
+ * @slot - Contenu du panneau.
+ * @slot footer - Boutons d'action.
+ * @part dialog - L'élément dialog.
+ * @part title - Le titre.
+ * @part close - Le bouton Fermer.
+ * @part body - La zone de contenu.
+ * @part footer - La zone des actions.
+ */
 @Component({
   tag: 'cr-drawer',
   styleUrls: ['../../global/overlay.css', 'cr-drawer.css'],
@@ -9,11 +19,16 @@ import { OverlayContent, releaseScroll, syncDialog } from '../../utils/overlay';
 export class CrDrawer {
   @Element() el!: HTMLElement;
 
+  /** Ouvre ou ferme le panneau. */
   @Prop({ mutable: true, reflect: true }) open = false;
+  /** Titre affiché, et nom du panneau pour les lecteurs d'écran. */
   @Prop() label!: string;
+  /** Libellé du bouton de fermeture. */
   @Prop() closeLabel = 'Fermer';
+  /** Bord d'apparition : end (droite) ou start (gauche). */
   @Prop({ reflect: true }) placement: 'start' | 'end' = 'end';
 
+  /** Émis à chaque fermeture : Échap, bouton Fermer ou open à false. */
   @Event() crClose: EventEmitter<void>;
 
   private dialog?: HTMLDialogElement;

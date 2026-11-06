@@ -3,6 +3,13 @@ import { FieldText, RequiredMark, describedBy } from '../../utils/field';
 
 export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
 
+/**
+ * Champ de saisie de texte.
+ * @part label - Le libellé.
+ * @part control - Le champ natif.
+ * @part hint - Le texte d'aide.
+ * @part error - Le message d'erreur.
+ */
 @Component({
   tag: 'cr-input',
   styleUrls: ['../../global/field.css', 'cr-input.css'],
@@ -12,18 +19,30 @@ export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
 export class CrInput {
   @AttachInternals() internals: ElementInternals;
 
+  /** Libellé affiché au-dessus du champ. */
   @Prop() label!: string;
+  /** Nom envoyé avec le formulaire. */
   @Prop({ reflect: true }) name?: string;
+  /** Valeur du champ. */
   @Prop({ mutable: true }) value = '';
+  /** Type de saisie. */
   @Prop() type: InputType = 'text';
+  /** Texte d'aide, lu par les lecteurs d'écran. */
   @Prop() hint?: string;
+  /** Message d'erreur ; passe le champ en état invalide. */
   @Prop() error?: string;
+  /** Texte indicatif affiché quand le champ est vide. */
   @Prop() placeholder?: string;
+  /** Indication de remplissage automatique du navigateur. */
   @Prop() autocomplete?: string;
+  /** Rend la saisie obligatoire. */
   @Prop({ reflect: true }) required = false;
+  /** Désactive le champ. */
   @Prop({ reflect: true }) disabled = false;
 
+  /** Émis à chaque frappe ; detail : la valeur. */
   @Event() crInput: EventEmitter<string>;
+  /** Émis quand le champ perd le focus après modification ; detail : la valeur. */
   @Event() crChange: EventEmitter<string>;
 
   private input?: HTMLInputElement;
