@@ -1,0 +1,14 @@
+{
+  "font": {
+    "family": { "$value": "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif", "$type": "fontFamily" },
+    "size": {
+      "s": { "$value": "12px", "$type": "dimension" },
+      "m": { "$value": "14px", "$type": "dimension" },
+      "l": { "$value": "16px", "$type": "dimension" }
+    },
+    "weight": {
+      "medium": { "$value": "500", "$type": "fontWeight" },
+      "bold": { "$value": "600", "$type": "fontWeight" }
+    }
+  }
+}

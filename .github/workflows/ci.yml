@@ -17,3 +17,5 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      - run: pnpm --filter playground-next exec playwright install --with-deps chromium
+      - run: pnpm --filter playground-next test:e2e
