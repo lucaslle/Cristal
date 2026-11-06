@@ -8,3 +8,7 @@ packages/*/src/generated/
 .DS_Store
 .stencil/
 packages/core/hydrate/
+test-results/
+playwright-report/
+.next/
+next-env.d.ts

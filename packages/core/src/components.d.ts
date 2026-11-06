@@ -5,8 +5,34 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { ButtonSize, ButtonType, ButtonVariant } from "./components/cr-button/cr-button";
+export { ButtonSize, ButtonType, ButtonVariant } from "./components/cr-button/cr-button";
 export namespace Components {
     interface CrButton {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * @default false
+         */
+        "fullWidth": boolean;
+        /**
+          * @default false
+         */
+        "loading": boolean;
+        /**
+          * @default 'm'
+         */
+        "size": ButtonSize;
+        /**
+          * @default 'button'
+         */
+        "type": ButtonType;
+        /**
+          * @default 'primary'
+         */
+        "variant": ButtonVariant;
     }
 }
 declare global {
@@ -22,9 +48,51 @@ declare global {
 }
 declare namespace LocalJSX {
     interface CrButton {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * The `id` of a `<form>` element to associate this element with.
+         */
+        "form"?: string;
+        /**
+          * @default false
+         */
+        "fullWidth"?: boolean;
+        /**
+          * @default false
+         */
+        "loading"?: boolean;
+        /**
+          * The name of the element, used when submitting an HTML form.
+         */
+        "name"?: string;
+        /**
+          * @default 'm'
+         */
+        "size"?: ButtonSize;
+        /**
+          * @default 'button'
+         */
+        "type"?: ButtonType;
+        /**
+          * @default 'primary'
+         */
+        "variant"?: ButtonVariant;
     }
+
+    interface CrButtonAttributes {
+        "variant": ButtonVariant;
+        "size": ButtonSize;
+        "type": ButtonType;
+        "disabled": boolean;
+        "loading": boolean;
+        "fullWidth": boolean;
+    }
+
     interface IntrinsicElements {
-        "cr-button": CrButton;
+        "cr-button": Omit<CrButton, keyof CrButtonAttributes> & { [K in keyof CrButton & keyof CrButtonAttributes]?: CrButton[K] } & { [K in keyof CrButton & keyof CrButtonAttributes as `attr:${K}`]?: CrButtonAttributes[K] } & { [K in keyof CrButton & keyof CrButtonAttributes as `prop:${K}`]?: CrButton[K] };
     }
 }
 export { LocalJSX as JSX };

@@ -1,0 +1,11 @@
+{
+  "control": {
+    "xs": { "$value": "30px", "$type": "dimension" },
+    "s": { "$value": "36px", "$type": "dimension" },
+    "m": { "$value": "40px", "$type": "dimension" },
+    "l": { "$value": "48px", "$type": "dimension" }
+  },
+  "radius": {
+    "m": { "$value": "6px", "$type": "dimension" }
+  }
+}
