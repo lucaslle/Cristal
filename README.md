@@ -2,7 +2,7 @@
 
 Bibliothèque de Web Components (Stencil) utilisable dans React et Next.js, préfixe `cr-`.
 
-Documentation : https://lucaslle.github.io/Cristal/
+Documentation : https://lucaslle.github.io/Cristal-UI/
 
 ## Installation
 
